@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tik Tak Toe</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: lightpink;
+      }
+      #container {
+        background-color: grey;
+        width: 500px;
+        height: 500px;
+        border: 2px solid black;
+      }
+      #canvas {
+        background-color: black;
+        border: 1px solid white;
+        width: 480px;
+        height: 400px;
+        margin: 5px;
+        display: grid;
+        grid-gap: 1px;
+        grid-template-columns: 33% 33% 33%;
+        grid-template-rows: 33% 33% 33%;
+      }
+
+      #one {
+        background-color: white;
+      }
+
+      #two {
+        background-color: white;
+      }
+
+      #three {
+        background-color: white;
+      }
+
+      #four {
+        background-color: white;
+      }
+
+      #five {
+        background-color: white;
+      }
+
+      #six {
+        background-color: white;
+      }
+
+      #seven {
+        background-color: white;
+      }
+
+      #eight {
+        background-color: white;
+      }
+
+      #nine {
+        background-color: white;
+      }
+
+      #turn {
+        background-color: yellow;
+        font-size: 50px;
+        font-family: Arial;
+      }
+
+      #restart {
+        float: right;
+        font-size: 30px;
+      }
+
+      h1 {
+        font-family: Arial;
+        color: brown;
+      }
+
+      .box:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+
+      .box {
+        font-size: 100px;
+        font-family: arial;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Tik Tak Toe</h1>
+    <div id="container">
+      <div id="canvas" onclick="input(event)">
+        <div class="box" id="one"></div>
+        <div class="box" id="two"></div>
+        <div class="box" id="three"></div>
+        <div class="box" id="four"></div>
+        <div class="box" id="five"></div>
+        <div class="box" id="six"></div>
+        <div class="box" id="seven"></div>
+        <div class="box" id="eight"></div>
+        <div class="box" id="nine"></div>
+      </div>
+      <div id="canvasFooter">
+        <span id="turnDisplay" style="font-size: 40px;">Turn</span>
+        <span id="turn"></span>
+        <a href="./tikTakToe.html"><span id="restart">Restart</span></a>
+      </div>
+    </div>
+
+    <script>
+      var status = "true";
+      turn.innerHTML = "X";
+
+      function input(event) {
+        var turn = document.getElementById("turn");
+        if (status == "true") {
+          var box = document.getElementById(event.target.id);
+          box.innerHTML = "X";
+          turn.innerHTML = "O";
+          winnerFinder();
+          status = "false";
+        } else if (status == "false") {
+          var box = document.getElementById(event.target.id);
+          box.innerHTML = "O";
+          turn.innerHTML = "X";
+          winnerFinder();
+          status = "true";
+        } else {
+        }
+      }
+
+      function winnerFinder() {
+        var canvas = document.getElementById("canvas");
+        var boxes = document.getElementsByClassName("box");
+        if (
+          (boxes[0].innerHTML == "X" &&
+            boxes[1].innerHTML == "X" &&
+            boxes[2].innerHTML == "X") ||
+          (boxes[3].innerHTML == "X" &&
+            boxes[4].innerHTML == "X" &&
+            boxes[5].innerHTML == "X") ||
+          (boxes[6].innerHTML == "X" &&
+            boxes[7].innerHTML == "X" &&
+            boxes[8].innerHTML == "X") ||
+          (boxes[0].innerHTML == "X" &&
+            boxes[3].innerHTML == "X" &&
+            boxes[6].innerHTML == "X") ||
+          (boxes[1].innerHTML == "X" &&
+            boxes[4].innerHTML == "X" &&
+            boxes[7].innerHTML == "X") ||
+          (boxes[2].innerHTML == "X" &&
+            boxes[5].innerHTML == "X" &&
+            boxes[8].innerHTML == "X") ||
+          (boxes[0].innerHTML == "X" &&
+            boxes[4].innerHTML == "X" &&
+            boxes[8].innerHTML == "X") ||
+          (boxes[2].innerHTML == "X" &&
+            boxes[4].innerHTML == "X" &&
+            boxes[8].innerHTML == "X")
+        ) {
+          winnerDeclarePlayer1();
+        } else if (
+          (boxes[0].innerHTML == "O" &&
+            boxes[1].innerHTML == "O" &&
+            boxes[2].innerHTML == "O") ||
+          (boxes[3].innerHTML == "O" &&
+            boxes[4].innerHTML == "O" &&
+            boxes[5].innerHTML == "O") ||
+          (boxes[6].innerHTML == "O" &&
+            boxes[7].innerHTML == "O" &&
+            boxes[8].innerHTML == "O") ||
+          (boxes[0].innerHTML == "O" &&
+            boxes[3].innerHTML == "O" &&
+            boxes[6].innerHTML == "O") ||
+          (boxes[1].innerHTML == "O" &&
+            boxes[4].innerHTML == "O" &&
+            boxes[7].innerHTML == "O") ||
+          (boxes[2].innerHTML == "O" &&
+            boxes[5].innerHTML == "O" &&
+            boxes[8].innerHTML == "O") ||
+          (boxes[0].innerHTML == "O" &&
+            boxes[4].innerHTML == "O" &&
+            boxes[8].innerHTML == "O") ||
+          (boxes[2].innerHTML == "O" &&
+            boxes[4].innerHTML == "O" &&
+            boxes[8].innerHTML == "O")
+        ) {
+          winnerDeclarePlayer2();
+        }
+      }
+
+      function winnerDeclarePlayer1() {
+        var canvas = document.getElementById("canvas");
+        canvas.setAttribute("style", "opacity:0.3;");
+        var canvasFooter = document.getElementById("canvasFooter");
+        var turn = document.getElementById("turn");
+        canvasFooter.removeChild(turn);
+        var turnDisplay = document.getElementById("turnDisplay");
+        turnDisplay.innerHTML = "Player 1 WON!!!!";
+        turnDisplay.style.backgroundColor = "yellow";
+        turnDisplay.style.color = "blue";
+      }
+
+      function winnerDeclarePlayer2() {
+        var canvas = document.getElementById("canvas");
+        canvas.setAttribute("style", "opacity:0.3;");
+        var canvasFooter = document.getElementById("canvasFooter");
+        var turn = document.getElementById("turn");
+        canvasFooter.removeChild(turn);
+        var turnDisplay = document.getElementById("turnDisplay");
+        turnDisplay.innerHTML = "Player 2 WON!!!!";
+        turnDisplay.style.backgroundColor = "yellow";
+        turnDisplay.style.color = "blue";
+      }
+    </script>
+  </body>
+</html>
